@@ -61,3 +61,21 @@ $ yarn start:dev
 - [#Yarn](https://yarnpkg.com/lang/en/) for Official package manager
 - [#CodeEditor](https://code.visualstudio.com/) Official text editor
 - [#StackOverflow](https://stackoverflow.com) thanks for helping and provide solution on every problem
+
+## File Structure (Shallow)
+
+├── src
+| ├── api
+│ │ └── logs
+│ │ └── order
+│ │ └── users
+│ ├── app
+│ ├── database
+| | └── models
+| │ └── migrations
+| │ └── queries
+│ ├── services
+| | └── rabbitmq
+│ ├── shared
+│ ├── main.ts
+└── package.json
