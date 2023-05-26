@@ -28,7 +28,7 @@ const channelAssertQueue = (channel, queueName = 'orderQueue') => {
 };
 
 export const sendToQueue = (channel, message, queueName = 'orderQueue') => {
-  const buffer = Buffer.from(message);
+  const buffer = Buffer.from(JSON.stringify(message));
   channel.sendToQueue(queueName, buffer);
 };
 
@@ -42,18 +42,16 @@ export const receiveFromQueue = (
     message => {
       if (message !== null) {
         const order = JSON.parse(message.content.toString());
-        console.log('Received order:', order);
-
         // Acknowledge the message to remove it from the queue
         channel.ack(message);
-        callback();
+        callback(order);
       }
     },
-    { noAck: true },
+    { noAck: false },
   );
 };
 
-export const createConnection = async (queueName = 'msg.*') => {
+export const createConnection = async (queueName = 'orderQueue') => {
   const conn = await connect();
   const channel = await createChannel(conn);
   const assertedChannelToQueue = await channelAssertQueue(channel, queueName);
