@@ -22,6 +22,12 @@ export class OrderController {
     return this.orderService.getMostBoughtMeal();
   }
 
+  @Get('/test/trigger')
+  trigger() {
+    //trigger test queue (debug purposes)
+    return this.orderService.trigger();
+  }
+
   @Post()
   create(@Body() createOrder) {
     const newOrder = this.orderService.create(createOrder);

@@ -1,7 +1,10 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { OrderModel } from 'src/database/models/order.model';
 import { ModelClass } from 'objection';
-import { createConnection, sendToQueue } from 'src/services/rabbitmq.service';
+import {
+  createConnection,
+  sendToQueue,
+} from 'src/services/rabbitmq/rabbitmq.service';
 import {
   getAllOrdersWithDetails,
   getMostBoughtMeal,
@@ -52,13 +55,13 @@ export class OrderService {
   }
 
   async getMostBoughtMeal(): Promise<ResponseData> {
-    const mostPopularMeal = getMostBoughtMeal();
+    const mostBoughtMeal = getMostBoughtMeal();
 
-    if (mostPopularMeal) {
+    if (mostBoughtMeal) {
       return {
         success: true,
-        message: 'Most popular meal fetched successfully.',
-        data: mostPopularMeal,
+        message: 'Most bought meal fetched successfully.',
+        data: mostBoughtMeal,
       };
     } else {
       return {
@@ -77,6 +80,16 @@ export class OrderService {
       success: true,
       message: 'Order created successfully.',
       data: order,
+    };
+  }
+
+  async trigger(): Promise<ResponseData> {
+    const { channel } = await createConnection();
+    sendToQueue(channel, { name: 'test push message' });
+    return {
+      success: true,
+      message: 'Order created successfully.',
+      data: null,
     };
   }
 }

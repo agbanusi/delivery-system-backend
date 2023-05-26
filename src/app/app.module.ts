@@ -7,9 +7,10 @@ import { LoggingInterceptor } from '../shared/Interceptors/logging.interceptor';
 import { TimeoutInterceptor } from '../shared/Interceptors/timeout.interceptor';
 import { ApiModule } from 'src/api/api.module';
 import { DatabaseModule } from 'src/database/database.module';
+import { RabbitMQModule } from 'src/services/rabbitmq/rabbitmq.module';
 
 @Module({
-  imports: [ApiModule, DatabaseModule],
+  imports: [ApiModule, DatabaseModule, RabbitMQModule],
   controllers: [AppController],
   providers: [
     AppService,
