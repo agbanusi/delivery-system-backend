@@ -88,7 +88,7 @@ export class OrderService {
     sendToQueue(channel, { name: 'test push message' });
     return {
       success: true,
-      message: 'Order created successfully.',
+      message: 'Test done successfully.',
       data: null,
     };
   }
