@@ -10,6 +10,18 @@ export class OrderController {
     return this.orderService.findAll();
   }
 
+  @Get('/popular')
+  getPopularMeal() {
+    //number of times a meal have been bought
+    return this.orderService.getMostPopularMeal();
+  }
+
+  @Get('/grossing')
+  getMostBoughtMeal() {
+    // total quantity of meal bought
+    return this.orderService.getMostBoughtMeal();
+  }
+
   @Post()
   create(@Body() createOrder) {
     const newOrder = this.orderService.create(createOrder);

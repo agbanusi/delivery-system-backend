@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalPipes(new CustomValidatePipe());
 
   // Add prefix to all api for request
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix('api');
 
   Logger.log(`Server ready at http://localhost:${port} `, 'ServerStarted');
   // Run server on port

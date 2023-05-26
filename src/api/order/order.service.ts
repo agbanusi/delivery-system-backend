@@ -5,6 +5,7 @@ import { createConnection, sendToQueue } from 'src/services/rabbitmq.service';
 import {
   getAllOrdersWithDetails,
   getMostBoughtMeal,
+  getMostPopularMeal,
 } from 'src/database/queries';
 
 export interface ResponseData {
@@ -33,6 +34,24 @@ export class OrderService {
   }
 
   async getMostPopularMeal(): Promise<ResponseData> {
+    const mostPopularMeal = getMostPopularMeal();
+
+    if (mostPopularMeal) {
+      return {
+        success: true,
+        message: 'Most popular meal fetched successfully.',
+        data: mostPopularMeal,
+      };
+    } else {
+      return {
+        success: false,
+        message: 'No meals found.',
+        data: null,
+      };
+    }
+  }
+
+  async getMostBoughtMeal(): Promise<ResponseData> {
     const mostPopularMeal = getMostBoughtMeal();
 
     if (mostPopularMeal) {

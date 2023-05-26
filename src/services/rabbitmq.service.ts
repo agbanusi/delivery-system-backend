@@ -1,7 +1,6 @@
 import * as amqp from 'amqplib';
-const connect = (
-  url = `amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASS}@${process.env.RABBITMQ_HOST}`,
-) => {
+const connect = (url = `amqp://${process.env.RABBITMQ_URL}`) => {
+  //url=${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASS}@${process.env.RABBITMQ_HOST}
   return new Promise((resolve, reject) => {
     amqp
       .connect(url)
