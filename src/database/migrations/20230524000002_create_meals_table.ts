@@ -3,6 +3,7 @@ import * as Knex from 'knex';
 exports.up = function(knex: Knex) {
   return knex.schema.createTable('meals', function(table) {
     table.string('id').primary();
+    table.boolean('calculated_order_id').notNullable();
     table.boolean('new').notNullable();
     table.string('name').notNullable();
     table.string('brand_id').notNullable();
@@ -32,9 +33,6 @@ exports.up = function(knex: Knex) {
     table.jsonb('meal_keywords').notNullable();
     table.integer('internal_profit').notNullable();
     table.string('meal_category_id').notNullable();
-
-    table.foreign('brand_id').references('brands.id');
-    table.foreign('meal_category_id').references('meal_categories.id');
   });
 };
 

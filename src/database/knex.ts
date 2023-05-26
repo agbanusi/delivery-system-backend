@@ -4,36 +4,30 @@ Dotenv.config({ path: '../../.env' });
 
 import { knexSnakeCaseMappers } from 'objection';
 
-const config = {
+module.exports = {
   development: {
-    client: 'mysql2',
+    client: 'pg',
     connection: {
-      // filename: './dev.mysql',
-      host: process.env.MYSQL_HOST || 'localhost',
-      user: process.env.MYSQL_USER || 'root',
-      password: process.env.MYSQL_PASSWORD || '',
-      database: process.env.MYSQL_DB || 'knex_mysql',
+      host: process.env.POSTGRES_HOST || 'localhost',
+      port: process.env.POSTGRES_PORT || 5432,
+      database: process.env.POSTGRES_DB || 'food_delivery',
+      user: process.env.POSTGRES_USER || 'postgres',
+      password: process.env.POSTGRES_PASSWORD || '',
     },
     migrations: {
       extension: 'ts',
       tableName: 'migrations',
       directory: path.join(__dirname, 'migrations'),
-      stub: path.join(__dirname, 'migrations', 'migration.stub'),
       timezone: 'UTC',
-    },
-    seeds: {
-      directory: path.join(__dirname, '/seeds'),
-      loadExtensions: ['.ts'],
-      stub: path.join(__dirname, '/seeds/seed.stub'),
     },
     ...knexSnakeCaseMappers(),
   },
   staging: {
-    client: 'mysql2',
+    client: 'pg',
     connection: {
-      database: process.env.MYSQL_DB,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
+      database: process.env.POSTGRES_DB,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
     },
     pool: {
       min: 2,
@@ -45,11 +39,11 @@ const config = {
     ...knexSnakeCaseMappers(),
   },
   production: {
-    client: 'mysql2',
+    client: 'pg',
     connection: {
-      database: process.env.MYSQL_DB,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
+      database: process.env.POSTGRES_DB,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
     },
     pool: {
       min: 2,
@@ -61,5 +55,3 @@ const config = {
     ...knexSnakeCaseMappers(),
   },
 }[process.env.NODE_ENV || 'development'];
-
-module.exports = { config };

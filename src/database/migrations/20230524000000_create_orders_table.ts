@@ -43,13 +43,6 @@ exports.up = function(knex: Knex) {
     table.time('scheduled_delivery_time').nullable();
     table.boolean('is_hidden').notNullable();
     table.integer('order_type_id').notNullable();
-
-    table.foreign('user_id').references('users.id');
-    table.foreign('rider_id').references('riders.id');
-    table.foreign('calculated_order_id').references('calculated_orders.id');
-    table.foreign('confirmed_by_id').references('users.id');
-    table.foreign('completed_by_id').references('users.id');
-    table.foreign('order_type_id').references('order_types.id');
   });
 };
 

@@ -1,10 +1,10 @@
 import { BaseModel } from './base.model';
 import { Model } from 'objection';
-import {OrderModel} from './order.model'
+import { OrderModel } from './order.model';
 
 export class OrderTypeModel extends BaseModel {
   static get tableName() {
-    return 'order_type';
+    return 'order_types';
   }
 
   name: string;
@@ -16,10 +16,9 @@ export class OrderTypeModel extends BaseModel {
       relation: Model.HasManyRelation,
       modelClass: OrderModel,
       join: {
-        from: 'order_type.id',
+        from: 'order_types.id',
         to: 'orders.order_type_id',
       },
     },
   };
 }
-
